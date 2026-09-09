@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ek4lxn3duby4"]
+
+[ext_resource type="Texture2D" uid="uid://b11ok3jk028tx" path="res://assets/Cards/Clubs 1.png" id="1_kikvd"]
+[ext_resource type="Script" uid="uid://cw83w3pvb2q1a" path="res://scenes/card.gd" id="1_rjlel"]
+[ext_resource type="AudioStream" uid="uid://boke63yrmwequ" path="res://assets/sound/card_place.mp3" id="5_1i5pp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5obu"]
+size = Vector2(102, 138)
+
+[node name="Card" type="Area2D" groups=["cards"]]
+script = ExtResource("1_rjlel")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kikvd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 1
+shape = SubResource("RectangleShape2D_q5obu")
+
+[node name="sfx_card_interact" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1i5pp")
+volume_db = -20.0
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

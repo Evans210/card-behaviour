@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b25keuu3cwwfm"]
+
+[ext_resource type="Texture2D" uid="uid://pftjvrot8g54" path="res://assets/Cards/Back Grey 1.png" id="1_afmow"]
+[ext_resource type="Script" uid="uid://drylu7pwcv6cd" path="res://scenes/discard_pile.gd" id="1_tlh23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlh23"]
+size = Vector2(103, 138)
+
+[node name="DiscardPile" type="Area2D"]
+script = ExtResource("1_tlh23")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_afmow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_tlh23")
