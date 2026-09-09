@@ -7,15 +7,24 @@ var is_dragging = false
 var grabbed_offset
 var is_discarding = false
 var discard_destination
+var window_size
+
+func _ready() -> void:
+	window_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
 	if is_dragging:
-		position = Vector2(get_global_mouse_position() + grabbed_offset)
+		var mouse_pos = get_global_mouse_position()
+		position = Vector2(
+			clamp(mouse_pos.x + grabbed_offset.x, 0, window_size.x), 
+			clamp(mouse_pos.y + grabbed_offset.y, 0, window_size.y)
+			)
+		
 	if is_discarding:
 		move_to_discard_destination(delta)
 
 func move_to_discard_destination(delta: float) -> void:
-	var distance := position.distance_to(discard_destination)
+	var distance = position.distance_to(discard_destination)
 	# Prevent overshooting the destination.
 	if distance <= discard_speed * delta:
 		position = discard_destination
@@ -46,7 +55,6 @@ func start_dragging():
 	tween.tween_property(
 		self, "scale", Vector2.ONE * drag_scale, 0.1
 	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
 
 func stop_dragging():
 	sfx_card_interact.play()

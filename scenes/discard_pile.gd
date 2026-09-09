@@ -1,9 +1,10 @@
 extends Area2D
 signal discard_pile_clicked
+var window_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var window_size = get_viewport_rect().size
+	window_size = get_viewport_rect().size
 	position = Vector2(window_size.x/2 + 100, window_size.y/2)
 
 

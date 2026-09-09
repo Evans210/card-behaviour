@@ -1,10 +1,10 @@
 extends Area2D
 signal deck_clicked
 @onready var sfx_deck_draw: AudioStreamPlayer = $sfx_deck_draw
-
+var window_size
 
 func _ready():
-	var window_size = get_viewport_rect().size
+	window_size = get_viewport_rect().size
 	position = Vector2(window_size.x/2 -100, window_size.y/2)
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
