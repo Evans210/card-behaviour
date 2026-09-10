@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cddioaj6pdikd"]
+[gd_scene load_steps=7 format=3 uid="uid://cddioaj6pdikd"]
 
 [ext_resource type="Script" uid="uid://upop1yh1yeb5" path="res://scenes/main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://c6hhqs1sn4lc3" path="res://assets/casino_texture.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ch70wr7j5q6sv" path="res://scenes/deck.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://c3kh7m7bbicqv" path="res://scenes/card_manager.tscn" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b25keuu3cwwfm" path="res://scenes/discard_pile.tscn" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://bty8bpakakmre" path="res://assets/sound/card_flip.mp3" id="5_lquwl"]
 
@@ -18,15 +19,17 @@ offset_bottom = 666.0
 texture = ExtResource("1_h2yge")
 stretch_mode = 1
 
+[node name="CardManager" parent="." instance=ExtResource("3_tefeu")]
+
+[node name="sfx_card_discarded" type="AudioStreamPlayer" parent="CardManager"]
+stream = ExtResource("5_lquwl")
+volume_db = -20.0
+
 [node name="Deck" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(266, 305)
 
 [node name="DiscardPile" parent="." instance=ExtResource("4_1bvp3")]
 position = Vector2(602, 319)
-
-[node name="sfx_card_discarded" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_lquwl")
-volume_db = -20.0
 
 [connection signal="deck_clicked" from="Deck" to="." method="_on_deck_deck_clicked"]
 [connection signal="discard_pile_clicked" from="DiscardPile" to="." method="_on_discard_pile_discard_pile_clicked"]
